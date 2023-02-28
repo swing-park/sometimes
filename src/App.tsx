@@ -6,6 +6,9 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "styles/theme";
 import store from "redux/config";
 import Main from "routes/Main";
+import NewCard from "routes/NewCard";
+import SignIn from "routes/SignIn";
+import SignUp from "routes/SignUp";
 import { Layout } from "components";
 
 const App = () => {
@@ -19,6 +22,9 @@ const App = () => {
               <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<Main />} />
+                  <Route path={"/cards/:mode"} element={<NewCard />} />
+                  <Route path="/signup" element={<SignUp />} />
+                  <Route path="/signin" element={<SignIn />} />
                 </Routes>
               </BrowserRouter>
             </Layout>

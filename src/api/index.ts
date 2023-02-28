@@ -1,7 +1,23 @@
 import axios from "axios";
-import { NewCard } from "types";
+import { NewCard, NewUser, User } from "types";
 
 const headers = { Authorization: `Bearer abcdefg` };
+
+export const signup = async (newUser: NewUser) => {
+  const data = await axios.post(
+    `${process.env.REACT_APP_SERVER_URL}/api/signup`,
+    newUser
+  );
+  return data;
+};
+
+export const signin = async (user: User) => {
+  const data = await axios.post(
+    `${process.env.REACT_APP_SERVER_URL}/api/login`,
+    user
+  );
+  return data;
+};
 
 export const getCards = async () => {
   const { data } = await axios.get(
@@ -24,8 +40,8 @@ export const getImgs = async () => {
   return data;
 };
 
-export const postCard = async (newCard: NewCard) => {
-  const data = await axios.post(
+export const createCard = async (newCard: NewCard) => {
+  const { data } = await axios.post(
     `${process.env.REACT_APP_SERVER_URL}/api/cards`,
     newCard,
     { headers }
@@ -34,7 +50,7 @@ export const postCard = async (newCard: NewCard) => {
 };
 
 export const editCard = async (id: string, modifyCard: NewCard) => {
-  const data = await axios.put(
+  const { data } = await axios.put(
     `${process.env.REACT_APP_SERVER_URL}/api/cards/${id}`,
     modifyCard,
     { headers }
@@ -43,7 +59,7 @@ export const editCard = async (id: string, modifyCard: NewCard) => {
 };
 
 export const deleteCard = async (id: string) => {
-  const data = await axios.delete(
+  const { data } = await axios.delete(
     `${process.env.REACT_APP_SERVER_URL}/api/cards/${id}`,
     { headers }
   );
@@ -51,7 +67,7 @@ export const deleteCard = async (id: string) => {
 };
 
 export const likeCard = async (id: string) => {
-  const data = await axios.put(
+  const { data } = await axios.put(
     `${process.env.REACT_APP_SERVER_URL}/api/cards/likes/${id}`,
     {},
     { headers }

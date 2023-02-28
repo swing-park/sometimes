@@ -10,3 +10,14 @@ export interface Card {
 export interface NewCard {
   content: string;
 }
+
+export interface NewUser {
+  username: string;
+  nickname: string;
+  password: string;
+}
+
+export interface User {
+  username: string;
+  password: string;
+}

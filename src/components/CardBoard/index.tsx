@@ -18,7 +18,7 @@ const CardBoard = () => {
         <Card
           key={card.id}
           card={card}
-          imgSrc={state.imgs[randomNum(40) - 1]}
+          // imgSrc={state.imgs[randomNum(40) - 1]}
         />
       ))}
       <StCreateBtn onClick={handleOnClickCreateBtn}>
