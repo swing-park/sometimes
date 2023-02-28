@@ -27,7 +27,8 @@ export const GlobalStyle = createGlobalStyle`
 const color = {
   black: "#111",
   white: "#fff",
-  backgroundColor: "#F35E4B",
+  // backgroundColor: "#F35E4B",
+  backgroundColor: "#FFFFFF",
 };
 
 export type Color = typeof color;

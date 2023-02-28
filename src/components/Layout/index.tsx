@@ -18,36 +18,32 @@ const Layout = ({ children }: Props) => {
 export default Layout;
 
 const StLogo = styled.div`
-  width: 100%;
-  text-align: center;
+  margin-top: 30px;
+  margin-left: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 24px;
+
+  color: #e24429;
+  opacity: 0.5;
   font-family: PFStarDust, sans-serif, Arial;
-  font-size: 5rem;
+  font-size: 2rem;
 `;
 
 const StBodyWrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  box-sizing: border-box;
+  margin: 0px;
+
   width: 100%;
   height: 100vh;
-  padding: 30px 0px;
+  overflow: hidden;
 
-  background-color: ${({ theme }) => theme.color.backgroundColor};
+  border: 20px solid #e24429;
 `;
 
 const StContainer = styled.div`
-  position: relative;
   display: flex;
-  flex-direction: column;
-
-  width: 900px;
-  height: 100px;
-  padding: 30px;
-  margin: 30px 0px;
-
-  border-radius: 50px;
-
-  background-color: ${({ theme }) => theme.color.white};
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  flex-wrap: wrap;
 `;

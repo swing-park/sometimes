@@ -45,31 +45,64 @@ const NewCard = () => {
 
   return (
     <>
-      <form onSubmit={onSubmitHandler}>
-        <Textarea
-          name="content"
-          value={card.content}
-          onChange={onChangeHandler}
-          onKeyDown={onKeyPressHandler}
-        />
-        {mode === "create" ? (
-          <button>등록하기</button>
-        ) : (
-          <button>수정하기</button>
-        )}
-      </form>
+      <StContainer>
+        <StHeader>게시글</StHeader>
+        <StForm onSubmit={onSubmitHandler}>
+          <Textarea
+            name="content"
+            value={card.content}
+            onChange={onChangeHandler}
+            onKeyDown={onKeyPressHandler}
+          />
+          {mode === "create" ? (
+            <button>등록하기</button>
+          ) : (
+            <button>수정하기</button>
+          )}
+        </StForm>
+      </StContainer>
     </>
   );
 };
 
 export default NewCard;
 
+const StContainer = styled.div`
+  width: 67%;
+  max-height: 500px;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: #f5f5f5;
+`;
+
+const StHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+
+  width: 100%;
+  height: 3vw;
+  background: #94c8b4;
+  border-radius: 16px 16px 0px 0px;
+`;
+
+const StForm = styled.form`
+  padding: 50px;
+`;
+
 const Textarea = styled.textarea`
   width: 100%;
-  border: 1px solid #eee;
-  box-sizing: border-box;
+  background: #ffffff;
+  border: 3px solid #333333;
   border-radius: 8px;
+  box-sizing: border-box;
+
   padding: 100px;
-  font-size: 14px;
+  font-size: 30px;
   margin-bottom: 20px;
 `;

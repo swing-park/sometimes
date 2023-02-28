@@ -7,17 +7,31 @@ interface Props {
 }
 
 const Card = ({ card, imgSrc }: Props) => {
-  return <StCardBox>{JSON.stringify(card)}</StCardBox>;
+  return (
+    <StCardBox>
+      <StContent>{JSON.stringify(card)}</StContent>
+      <StCardFooter>
+        <div>20 may</div>
+        <div>좋아요</div>
+      </StCardFooter>
+    </StCardBox>
+  );
 };
 
 export default Card;
 
 const StCardBox = styled.div<{ imgSrc?: string }>`
-  width: 100%;
-  border: 1px solid red;
-  border-radius: 10px;
-  padding: 10px;
+  box-sizing: border-box;
+  padding: 70px;
 
-  background-image: ${(props) => `url(${props.imgSrc})`};
-  background-size: cover;
+  background: #ffffff;
+  border: 3px solid #333333;
+  border-radius: 8px;
+`;
+
+const StContent = styled.div``;
+
+const StCardFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

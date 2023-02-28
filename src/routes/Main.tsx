@@ -5,6 +5,7 @@ import { CardBoard } from "components";
 import { getCards, getImgs } from "api";
 import { Card } from "types";
 import cardModule from "redux/modules/card";
+import styled from "styled-components";
 
 const temp: Card[] = [
   {
