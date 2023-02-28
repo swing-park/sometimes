@@ -1,26 +1,30 @@
 import axios from "axios";
-import { Card } from "types";
+import { NewCard } from "types";
 
 const headers = { Authorization: `Bearer abcdefg` };
 
 export const getCards = async () => {
-  const data = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/cards`);
+  const { data } = await axios.get(
+    `${process.env.REACT_APP_SERVER_URL}/api/cards`
+  );
   return data;
 };
 
 export const getCard = async (id: string) => {
-  const data = await axios.get(
+  const { data } = await axios.get(
     `${process.env.REACT_APP_SERVER_URL}/api/cards/${id}`
   );
   return data;
 };
 
 export const getImgs = async () => {
-  const data = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/image`);
+  const { data } = await axios.get(
+    `${process.env.REACT_APP_SERVER_URL}/api/image`
+  );
   return data;
 };
 
-export const postCard = async (newCard: Card) => {
+export const postCard = async (newCard: NewCard) => {
   const data = await axios.post(
     `${process.env.REACT_APP_SERVER_URL}/api/cards`,
     newCard,
@@ -29,7 +33,7 @@ export const postCard = async (newCard: Card) => {
   return data;
 };
 
-export const editCard = async (id: string, modifyCard: Card) => {
+export const editCard = async (id: string, modifyCard: NewCard) => {
   const data = await axios.put(
     `${process.env.REACT_APP_SERVER_URL}/api/cards/${id}`,
     modifyCard,

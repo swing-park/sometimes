@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import MyPageToolBar from "../MyPageToolBar";
 
-const Layout = () => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const Layout = ({ children }: Props) => {
   return (
     <StBodyWrapper>
       <StLogo>ㄱr끔...⭐️</StLogo>
       <MyPageToolBar isLogin />
-      <StContainer>container</StContainer>
+      <StContainer>{children}</StContainer>
     </StBodyWrapper>
   );
 };
@@ -33,6 +37,7 @@ const StBodyWrapper = styled.div`
 `;
 
 const StContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
 

@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "styles/theme";
 import store from "redux/config";
 import Main from "routes/Main";
+import { Layout } from "components";
 
 const App = () => {
   return (
@@ -14,11 +15,13 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <QueryClientProvider client={new QueryClient()}>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Main />} />
-              </Routes>
-            </BrowserRouter>
+            <Layout>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Main />} />
+                </Routes>
+              </BrowserRouter>
+            </Layout>
           </QueryClientProvider>
         </Provider>
       </ThemeProvider>
