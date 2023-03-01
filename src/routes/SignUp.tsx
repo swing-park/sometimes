@@ -1,9 +1,10 @@
-import styled from "styled-components";
 import { useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { signup } from "api";
 import { NewUser } from "types";
+import { Wrapper, Button, Text, Input } from "components";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -14,12 +15,10 @@ const SignUp = () => {
     password: "",
   });
 
-  //상태관리 위해 초기값 세팅
   const [usernameInput, setUsernameInput] = useState("");
   const [nicknameInput, setNicknameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
-  //정규식
   const regUsername = /^[a-z0-9]{4,10}$/;
   const regNickname = /^[ㄱ-ㅎ|가-힣A-Za-z0-9]{2,6}$/;
   const regPassword = /^[a-zA-Z0-9\\d`~!@#$%^&()-_=+]{8,24}$/;
@@ -74,48 +73,53 @@ const SignUp = () => {
   return (
     <>
       <StContainer>
+        <StHeader>Sign Up</StHeader>
         <StForm onSubmit={onSubmitHandler}>
-          <StMain>
-            <div>
-              <div>nickname</div>
-            </div>
-            <input
-              type="text"
-              onChange={onChangeHandler}
-              name="nickname"
-              value={user.nickname}
-            />
-            <div>
-              <div>{nicknameInput}</div>
-            </div>
+          <Wrapper mg="10px 0">
+            <Text size="16">nickname</Text>
+          </Wrapper>
+          <Input
+            type="text"
+            onChange={onChangeHandler}
+            name="nickname"
+            value={user.nickname}
+          />
+          <Wrapper mg="10px 0">
+            <Text size="16" color="red">
+              {nicknameInput}
+            </Text>
+          </Wrapper>
 
-            <div>
-              <div>id</div>
-            </div>
-            <input
-              type="text"
-              onChange={onChangeHandler}
-              name="username"
-              value={user.username}
-            />
-            <div>
-              <div>{usernameInput}</div>
-            </div>
+          <Wrapper mg="10px 0">
+            <Text size="16">id</Text>
+          </Wrapper>
+          <Input
+            type="text"
+            onChange={onChangeHandler}
+            name="username"
+            value={user.username}
+          />
+          <Wrapper mg="10px 0">
+            <Text size="16" color="red">
+              {usernameInput}
+            </Text>
+          </Wrapper>
 
-            <div>
-              <div>password</div>
-            </div>
-            <input
-              type="password"
-              onChange={onChangeHandler}
-              name="password"
-              value={user.password}
-            />
-            <div>
-              <div>{passwordInput}</div>
-            </div>
-          </StMain>
-          <button>회원가입</button>
+          <Wrapper mg="10px 0">
+            <Text size="16">password</Text>
+          </Wrapper>
+          <Input
+            type="password"
+            onChange={onChangeHandler}
+            name="password"
+            value={user.password}
+          />
+          <Wrapper mg="10px 0">
+            <Text size="16" color="red">
+              {passwordInput}
+            </Text>
+          </Wrapper>
+          <Button mg="10px 0">회원가입</Button>
         </StForm>
       </StContainer>
     </>
@@ -125,20 +129,34 @@ const SignUp = () => {
 export default SignUp;
 
 const StContainer = styled.div`
-  height: 100%;
-  border: 1px solid black;
-  padding: 50px;
+  width: 67%;
+  max-height: 500px;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: #f5f5f5;
 `;
 
-const StMain = styled.div`
+const StHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+
   width: 100%;
+  height: 3vw;
+  background: #94c8b4;
+  border-radius: 16px 16px 0px 0px;
 `;
 
 const StForm = styled.form`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 `;

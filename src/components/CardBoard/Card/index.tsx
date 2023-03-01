@@ -45,11 +45,11 @@ const StCardBox = styled(motion.div)<{ imgsrc: string }>`
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 30%;
-  height: 150px;
+  width: 350px;
+  height: 250px;
   border: 1px solid red;
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 24px;
+  padding: 20px;
   cursor: pointer;
 
   &::after {

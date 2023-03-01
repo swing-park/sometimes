@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Avatar } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
@@ -36,15 +35,14 @@ const MyPageToolBar = ({ isLogin }: Props) => {
 export default MyPageToolBar;
 
 const StMyPageToolBar = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
+  color: #e24429;
+
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   padding: 10px;
   height: 10px;
 
   border-radius: 50px;
-  background-color: ${({ theme }) => theme.color.white};
 `;
