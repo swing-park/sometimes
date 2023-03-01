@@ -2,14 +2,17 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { signin } from "api";
 import { User } from "types";
 import { Wrapper, Button, Text, Input } from "components";
+import userModule from "redux/modules/user";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [_, setCookie] = useCookies(["Access-Token"]);
+  const dispatch = useDispatch();
   const [user, setUser] = useState<User>({
     username: "",
     password: "",
@@ -18,6 +21,7 @@ const SignIn = () => {
   const { mutate } = useMutation(signin, {
     onSuccess: (response) => {
       if (response) {
+        dispatch(userModule.actions.setUser(response.data.nickname));
         setCookie("Access-Token", response?.headers.authorization.substr(7));
         alert("로그인 성공!");
         navigate("/");
