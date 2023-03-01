@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
@@ -8,26 +8,33 @@ import { RootState } from "redux/config";
 import { Card as ICard } from "types";
 import Card from "./Card";
 import Modal from "./Card/Modal";
-import Button from "components/Elem/Button";
+import { Filter } from "components";
 
 const CardBoard = () => {
   const [clickedCard, setClickedCard] = useState<ICard>();
   const [clickedCardId, setClickedCardId] = useState<null | string>(null);
+  const [cards, setCards] = useState<ICard[]>();
   const state = useSelector((state: RootState) => state.cardReducer);
   const navigate = useNavigate();
   const handleOnClickCreateBtn = () => navigate("/cards/create");
 
+  useEffect(() => {
+    setCards(state.cards);
+  }, [state.cards]);
+
   return (
     <StContainer>
+      <Filter setCards={setCards} existCards={state.cards} />
       <StContent>
-        {state.cards.map((card) => (
-          <Card
-            key={card.id}
-            card={card}
-            setClickedCard={setClickedCard}
-            setClickedCardId={setClickedCardId}
-          />
-        ))}
+        {cards &&
+          cards.map((card) => (
+            <Card
+              key={card.id}
+              card={card}
+              setClickedCard={setClickedCard}
+              setClickedCardId={setClickedCardId}
+            />
+          ))}
       </StContent>
       <StBtn onClick={handleOnClickCreateBtn}>
         <Add />
