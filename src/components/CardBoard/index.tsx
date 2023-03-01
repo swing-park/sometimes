@@ -14,7 +14,7 @@ const CardBoard = () => {
 
   return (
     <StContainer>
-      <StHeader>Sign Up</StHeader>
+      <StHeader>ㄴr는 ㄱr 끔 눈물을 흘린ㄷr</StHeader>
       <StContent>
         {state.cards.map((card) => (
           <Card

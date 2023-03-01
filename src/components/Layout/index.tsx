@@ -7,18 +7,21 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <StBodyWrapper>
-      <StLogo>ㄱr끔...⭐️</StLogo>
-      <MyPageToolBar isLogin />
-      <StContainer>{children}</StContainer>
-    </StBodyWrapper>
+    <>
+      <StHeaderImg />
+      <StBodyWrapper>
+        <StLogo>ㄱr끔...⭐️</StLogo>
+        <MyPageToolBar isLogin />
+        <StContainer>{children}</StContainer>
+      </StBodyWrapper>
+    </>
   );
 };
 
 export default Layout;
 
 const StLogo = styled.div`
-  margin-top: 30px;
+  margin-top: 40px;
   margin-left: 10px;
   font-style: normal;
   font-weight: 400;
@@ -39,7 +42,17 @@ const StBodyWrapper = styled.div`
   height: 100vh;
   overflow: hidden;
 
-  border: 20px solid #e24429;
+  border: 20px solid #f4f4f4;
+`;
+
+const StHeaderImg = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  z-index: 30;
+  background-image: url("https://i.pinimg.com/originals/da/ed/11/daed11c4d95b24a8d8656c5cbb092b81.gif");
+  background-position: center;
+  background-size: cover;
 `;
 
 const StContainer = styled.div`

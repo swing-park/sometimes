@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { createCard } from "api";
 import { NewCard as INewCard } from "types";
+import Button from "components/Elem/Button";
 
 const NewCard = () => {
   const [card, setCard] = useState<INewCard>({
@@ -46,7 +47,7 @@ const NewCard = () => {
   return (
     <>
       <StContainer>
-        <StHeader>게시글</StHeader>
+        <StHeader>Notice Board</StHeader>
         <StForm onSubmit={onSubmitHandler}>
           <Textarea
             name="content"
@@ -55,9 +56,9 @@ const NewCard = () => {
             onKeyDown={onKeyPressHandler}
           />
           {mode === "create" ? (
-            <button>등록하기</button>
+            <Button>등록하기</Button>
           ) : (
-            <button>수정하기</button>
+            <Button>수정하기</Button>
           )}
         </StForm>
       </StContainer>
