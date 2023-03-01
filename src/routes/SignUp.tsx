@@ -1,13 +1,10 @@
-import styled from "styled-components";
 import { useState } from "react";
-import { useQueryClient, useMutation } from "react-query";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { signup } from "api";
 import { NewUser } from "types";
-import Button from "components/Elem/Button";
-import Wrapper from "components/Elem/Wrapper";
-import Text from "components/Elem/Text";
-import Input from "components/Elem/Input";
+import { Wrapper, Button, Text, Input } from "components";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -18,24 +15,21 @@ const SignUp = () => {
     password: "",
   });
 
-  //상태관리 위해 초기값 세팅
   const [usernameInput, setUsernameInput] = useState("");
   const [nicknameInput, setNicknameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
-  //정규식
   const regUsername = /^[a-z0-9]{4,10}$/;
   const regNickname = /^[ㄱ-ㅎ|가-힣A-Za-z0-9]{2,6}$/;
   const regPassword = /^[a-zA-Z0-9\\d`~!@#$%^&()-_=+]{8,24}$/;
 
-  //리액트 쿼리 관련 코드
-  const queryClient = useQueryClient();
   const { mutate } = useMutation(signup, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("user");
-      setUser({ username: "", nickname: "", password: "" });
-      alert("회원가입 성공!");
-      navigate("/signin");
+    onSuccess: (response) => {
+      if (response) {
+        setUser({ username: "", nickname: "", password: "" });
+        alert("회원가입 성공!");
+        navigate("/signin");
+      }
     },
   });
 

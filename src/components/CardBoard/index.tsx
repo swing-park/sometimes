@@ -1,17 +1,21 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { IconButton } from "@mui/material";
 import { Add } from "@mui/icons-material";
+import { AnimatePresence } from "framer-motion";
 import { RootState } from "redux/config";
+import { Card as ICard } from "types";
 import Card from "./Card";
+import Modal from "./Card/Modal";
 import Button from "components/Elem/Button";
 
 const CardBoard = () => {
+  const [clickedCard, setClickedCard] = useState<ICard>();
+  const [clickedCardId, setClickedCardId] = useState<null | string>(null);
   const state = useSelector((state: RootState) => state.cardReducer);
   const navigate = useNavigate();
   const handleOnClickCreateBtn = () => navigate("/cards/create");
-  const randomNum = (max: number) => Math.floor(Math.random() * max + 1);
 
   return (
     <StContainer>
@@ -20,13 +24,22 @@ const CardBoard = () => {
           <Card
             key={card.id}
             card={card}
-            // imgSrc={state.imgs[randomNum(40) - 1]}
+            setClickedCard={setClickedCard}
+            setClickedCardId={setClickedCardId}
           />
         ))}
       </StContent>
       <StBtn onClick={handleOnClickCreateBtn}>
         <Add />
       </StBtn>
+      <AnimatePresence>
+        {clickedCardId && clickedCard && (
+          <Modal
+            setClickedCardId={setClickedCardId}
+            clickedCard={clickedCard}
+          />
+        )}
+      </AnimatePresence>
     </StContainer>
   );
 };
@@ -38,9 +51,8 @@ const StContainer = styled.div`
   max-height: 500px;
   min-height: 700px;
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-
   margin: 0px auto;
 `;
 

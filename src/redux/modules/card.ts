@@ -3,12 +3,20 @@ import { Card } from "types";
 
 interface State {
   cards: Card[];
-  imgs: string[];
 }
 
 const initialState: State = {
-  cards: [],
-  imgs: [],
+  cards: [
+    {
+      id: "",
+      content: "",
+      nickname: "",
+      createdAt: "",
+      modifiedAt: "",
+      likes: 0,
+      image: "",
+    },
+  ],
 };
 
 const cardModule = createSlice({
@@ -17,9 +25,6 @@ const cardModule = createSlice({
   reducers: {
     setCards: (state, action) => {
       state.cards = action.payload;
-    },
-    setImgs: (state, action) => {
-      state.imgs = action.payload;
     },
   },
 });
