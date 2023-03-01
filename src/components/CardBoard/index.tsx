@@ -8,7 +8,6 @@ import { RootState } from "redux/config";
 import { Card as ICard } from "types";
 import Card from "./Card";
 import Modal from "./Card/Modal";
-import Button from "components/Elem/Button";
 
 const CardBoard = () => {
   const [clickedCard, setClickedCard] = useState<ICard>();
@@ -20,6 +19,9 @@ const CardBoard = () => {
   return (
     <StContainer>
       <StContent>
+        <StBtn onClick={handleOnClickCreateBtn}>
+          <Add sx={{ fontSize: 100, color: "white" }} />
+        </StBtn>
         {state.cards.map((card) => (
           <Card
             key={card.id}
@@ -29,9 +31,6 @@ const CardBoard = () => {
           />
         ))}
       </StContent>
-      <StBtn onClick={handleOnClickCreateBtn}>
-        <Add />
-      </StBtn>
       <AnimatePresence>
         {clickedCardId && clickedCard && (
           <Modal
@@ -47,26 +46,31 @@ const CardBoard = () => {
 export default CardBoard;
 
 const StContainer = styled.div`
-  width: 67%;
+  width: 100%;
   max-height: 500px;
   min-height: 700px;
+
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
+  flex-wrap: wrap;
   margin: 0px auto;
 `;
 
 const StContent = styled.div`
-  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
 `;
 
 const StBtn = styled.div`
-  box-sizing: border-box;
   width: 350px;
   height: 250px;
   padding: 20px;
 
-  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   border: 3px solid #ffffff;
   border-radius: 24px;
 `;
