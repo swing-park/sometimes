@@ -19,11 +19,10 @@ const MyPageToolBar = ({ isLogin }: Props) => {
 };
 
 export default MyPageToolBar;
-
 const StMyPageToolBar = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
+  color: #e24429;
+  letter-spacing: 5px;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,5 +30,4 @@ const StMyPageToolBar = styled.div`
   height: 10px;
 
   border-radius: 50px;
-  background-color: ${({ theme }) => theme.color.white};
 `;

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { createCard } from "api";
 import { NewCard as INewCard } from "types";
+import Button from "components/Elem/Button";
 
 const NewCard = () => {
   const [card, setCard] = useState<INewCard>({
@@ -45,31 +46,54 @@ const NewCard = () => {
 
   return (
     <>
-      <form onSubmit={onSubmitHandler}>
-        <Textarea
-          name="content"
-          value={card.content}
-          onChange={onChangeHandler}
-          onKeyDown={onKeyPressHandler}
-        />
-        {mode === "create" ? (
-          <button>등록하기</button>
-        ) : (
-          <button>수정하기</button>
-        )}
-      </form>
+      <StContainer>
+        <StForm onSubmit={onSubmitHandler}>
+          <Textarea
+            name="content"
+            value={card.content}
+            onChange={onChangeHandler}
+            onKeyDown={onKeyPressHandler}
+          />
+          {mode === "create" ? (
+            <Button>등록하기</Button>
+          ) : (
+            <Button>수정하기</Button>
+          )}
+        </StForm>
+      </StContainer>
     </>
   );
 };
 
 export default NewCard;
 
+const StContainer = styled.div`
+  margin: 0px 52px;
+  max-height: 300px;
+  min-height: 650px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StForm = styled.form`
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const Textarea = styled.textarea`
-  width: 100%;
-  border: 1px solid #eee;
   box-sizing: border-box;
-  border-radius: 8px;
-  padding: 100px;
-  font-size: 14px;
+  width: 500px;
+  height: 350px;
+
+  background: #ffffff;
+  border: 1px solid lightgray;
+  border-radius: 24px;
+
+  padding: 30px;
+  font-size: 30px;
   margin-bottom: 20px;
 `;

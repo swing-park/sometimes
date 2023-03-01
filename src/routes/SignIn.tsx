@@ -3,6 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useQueryClient, useMutation } from "react-query";
 import { signin } from "api";
 import { User } from "types";
+import styled from "styled-components";
+import Wrapper from "components/Elem/Wrapper";
+import Button from "components/Elem/Button";
+import Text from "components/Elem/Text";
+import Input from "components/Elem/Input";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -47,39 +52,69 @@ const SignIn = () => {
 
   return (
     <>
-      <h2>로그인</h2>
-      <form onSubmit={onSubmitHandler}>
-        <div>
-          <div>id</div>
-        </div>
-        <input
-          type="text"
-          onChange={onChangeHandler}
-          name="username"
-          value={user.username || ""}
-        />
-        <br />
-        <div>
-          <div>password</div>
-        </div>
-        <input
-          type="password"
-          onChange={onChangeHandler}
-          name="password"
-          value={user.password || ""}
-        />
-        <br />
-        <button>로그인</button>
-      </form>
-
-      <div>
-        <div>
-          회원이 아니신가요?
-          <Link to={"/signup"}>회원가입</Link>
-        </div>
-      </div>
+      <StContainer>
+        <StHeader>Sign In</StHeader>
+        <StForm onSubmit={onSubmitHandler}>
+          <Wrapper mg="10px 0">
+            <Text size="16">id</Text>
+          </Wrapper>
+          <Input
+            type="text"
+            onChange={onChangeHandler}
+            name="username"
+            value={user.username || ""}
+          />
+          <Wrapper mg="10px 0">
+            <Text size="16">password</Text>
+          </Wrapper>
+          <Input
+            type="password"
+            onChange={onChangeHandler}
+            name="password"
+            value={user.password || ""}
+          />
+          <Button mg="20px 0">로그인</Button>
+          <Wrapper>
+            회원이 아니신가요?
+            <Link to={"/signup"}>회원가입</Link>
+          </Wrapper>
+        </StForm>
+      </StContainer>
     </>
   );
 };
 
 export default SignIn;
+
+const StContainer = styled.div`
+  width: 67%;
+  max-height: 500px;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: #f5f5f5;
+`;
+
+const StHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+
+  width: 100%;
+  height: 3vw;
+  background: #94c8b4;
+  border-radius: 16px 16px 0px 0px;
+`;
+
+const StForm = styled.form`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
