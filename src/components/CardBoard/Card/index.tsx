@@ -22,11 +22,13 @@ export default Card;
 
 const StCardBox = styled.div<{ imgSrc?: string }>`
   box-sizing: border-box;
-  padding: 70px;
+  width: 350px;
+  height: 250px;
+  padding: 20px;
 
   background: #ffffff;
-  border: 3px solid #333333;
-  border-radius: 8px;
+  border: 3px solid #ffffff;
+  border-radius: 24px;
 `;
 
 const StContent = styled.div``;

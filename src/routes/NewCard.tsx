@@ -47,7 +47,6 @@ const NewCard = () => {
   return (
     <>
       <StContainer>
-        <StHeader>Notice Board</StHeader>
         <StForm onSubmit={onSubmitHandler}>
           <Textarea
             name="content"
@@ -69,41 +68,32 @@ const NewCard = () => {
 export default NewCard;
 
 const StContainer = styled.div`
-  width: 67%;
-  max-height: 500px;
-  min-height: 700px;
+  margin: 0px 52px;
+  max-height: 300px;
+  min-height: 650px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  background: #f5f5f5;
-`;
-
-const StHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  gap: 10px;
-
-  width: 100%;
-  height: 3vw;
-  background: #94c8b4;
-  border-radius: 16px 16px 0px 0px;
 `;
 
 const StForm = styled.form`
   padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Textarea = styled.textarea`
-  width: 100%;
-  background: #ffffff;
-  border: 3px solid #333333;
-  border-radius: 8px;
   box-sizing: border-box;
+  width: 500px;
+  height: 350px;
 
-  padding: 100px;
+  background: #ffffff;
+  border: 1px solid lightgray;
+  border-radius: 24px;
+
+  padding: 30px;
   font-size: 30px;
   margin-bottom: 20px;
 `;

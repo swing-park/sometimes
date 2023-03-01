@@ -21,13 +21,13 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   body {
+    background-color: #ffb7d8;
   }
 `;
 
 const color = {
   black: "#111",
   white: "#fff",
-  // backgroundColor: "#F35E4B",
   backgroundColor: "#FFFFFF",
 };
 
