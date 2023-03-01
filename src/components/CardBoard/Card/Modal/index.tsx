@@ -75,8 +75,7 @@ const Modal = ({ clickedCard, setClickedCardId }: Props) => {
       onClick={() => setClickedCardId(null)}
     >
       <StCardBox imgsrc={clickedCard.image} layoutId={clickedCard.id}>
-        {/* {clickedCard.nickname === "재훈님 최고" && ( */}
-        {true && (
+        {clickedCard.nickname === sessionStorage.getItem("nickname") && (
           <>
             <button style={{ zIndex: "999" }} onClick={handleOnClickEditBtn}>
               수정
