@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useCookies } from "react-cookie";
 import MyPageToolBar from "../MyPageToolBar";
 
 interface Props {
@@ -6,10 +7,12 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => {
+  const [cookies] = useCookies(["Access-Token"]);
+
   return (
     <StBodyWrapper>
       <StLogo>ㄱr끔...⭐️</StLogo>
-      <MyPageToolBar isLogin />
+      <MyPageToolBar isLogin={cookies["Access-Token"] ? true : false} />
       <StContainer>{children}</StContainer>
     </StBodyWrapper>
   );
@@ -25,7 +28,6 @@ const StLogo = styled.div`
 `;
 
 const StBodyWrapper = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,12 +39,11 @@ const StBodyWrapper = styled.div`
 `;
 
 const StContainer = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
 
   width: 900px;
-  height: 100px;
+  height: 100%;
   padding: 30px;
   margin: 30px 0px;
 

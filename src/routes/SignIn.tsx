@@ -1,27 +1,25 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useQueryClient, useMutation } from "react-query";
+import { useMutation } from "react-query";
+import { useCookies } from "react-cookie";
 import { signin } from "api";
 import { User } from "types";
 
 const SignIn = () => {
   const navigate = useNavigate();
-
-  //nickname, id, pw 담는 useState
+  const [_, setCookie] = useCookies(["Access-Token"]);
   const [user, setUser] = useState<User>({
     username: "",
     password: "",
   });
 
-  //리액트 쿼리 관련 코드
-  const queryClient = useQueryClient();
   const { mutate } = useMutation(signin, {
     onSuccess: (response) => {
-      //TODO: react-cookie
-      console.log(response);
-      queryClient.invalidateQueries("user");
-      alert("로그인 성공!");
-      navigate("/");
+      if (response) {
+        setCookie("Access-Token", response?.headers.authorization.substr(7));
+        alert("로그인 성공!");
+        navigate("/");
+      }
     },
   });
 
