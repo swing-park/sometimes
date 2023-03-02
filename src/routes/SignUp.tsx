@@ -1,9 +1,11 @@
-import styled from "styled-components";
 import { useState } from "react";
-import { useQueryClient, useMutation } from "react-query";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { signup } from "api";
 import { NewUser } from "types";
+import { Wrapper, Text, Input } from "components";
+import Button from "@mui/material/Button";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -14,24 +16,21 @@ const SignUp = () => {
     password: "",
   });
 
-  //상태관리 위해 초기값 세팅
   const [usernameInput, setUsernameInput] = useState("");
   const [nicknameInput, setNicknameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
-  //정규식
   const regUsername = /^[a-z0-9]{4,10}$/;
-  const regNickname = /^[ㄱ-ㅎ|가-힣A-Za-z0-9]{2,6}$/;
+  const regNickname = /^[ㄱ-ㅎ|가-힣A-Za-z0-9]{2,10}$/;
   const regPassword = /^[a-zA-Z0-9\\d`~!@#$%^&()-_=+]{8,24}$/;
 
-  //리액트 쿼리 관련 코드
-  const queryClient = useQueryClient();
   const { mutate } = useMutation(signup, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("user");
-      setUser({ username: "", nickname: "", password: "" });
-      alert("회원가입 성공!");
-      navigate("/signin");
+    onSuccess: (response) => {
+      if (response) {
+        setUser({ username: "", nickname: "", password: "" });
+        alert("회원가입 성공!");
+        navigate("/signin");
+      }
     },
   });
 
@@ -75,48 +74,57 @@ const SignUp = () => {
   return (
     <>
       <StContainer>
+        <StHeader>Sign Up</StHeader>
         <StForm onSubmit={onSubmitHandler}>
-          <StMain>
-            <div>
-              <div>nickname</div>
-            </div>
-            <input
+          <StInputs>
+            <Wrapper mg="10px 0">
+              <Text size="16">nickname</Text>
+            </Wrapper>
+            <Input
               type="text"
               onChange={onChangeHandler}
               name="nickname"
               value={user.nickname}
             />
-            <div>
-              <div>{nicknameInput}</div>
-            </div>
+            <Wrapper mg="10px 0">
+              <Text size="16" color="red">
+                {nicknameInput}
+              </Text>
+            </Wrapper>
 
-            <div>
-              <div>id</div>
-            </div>
-            <input
+            <Wrapper mg="10px 0">
+              <Text size="16">id</Text>
+            </Wrapper>
+            <Input
               type="text"
               onChange={onChangeHandler}
               name="username"
               value={user.username}
             />
-            <div>
-              <div>{usernameInput}</div>
-            </div>
+            <Wrapper mg="10px 0">
+              <Text size="16" color="red">
+                {usernameInput}
+              </Text>
+            </Wrapper>
 
-            <div>
-              <div>password</div>
-            </div>
-            <input
+            <Wrapper mg="10px 0">
+              <Text size="16">password</Text>
+            </Wrapper>
+            <Input
               type="password"
               onChange={onChangeHandler}
               name="password"
               value={user.password}
             />
-            <div>
-              <div>{passwordInput}</div>
-            </div>
-          </StMain>
-          <button>회원가입</button>
+            <Wrapper mg="10px 0">
+              <Text size="16" color="red">
+                {passwordInput}
+              </Text>
+            </Wrapper>
+          </StInputs>
+          <Button type="submit" variant="outlined" size="large">
+            회원가입
+          </Button>
         </StForm>
       </StContainer>
     </>
@@ -126,20 +134,54 @@ const SignUp = () => {
 export default SignUp;
 
 const StContainer = styled.div`
-  height: 100%;
-  border: 1px solid black;
-  padding: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 400px;
+  max-width: 100%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 16px;
+  box-shadow: rgb(0 0 0 / 25%) 0px 14px 28px, rgb(0 0 0 / 22%) 0px 10px 10px;
+  position: relative;
+  overflow: hidden;
+  border: none;
+
+  margin: 20px;
+  padding: 0;
 `;
 
-const StMain = styled.div`
+const StHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  color: white;
+
   width: 100%;
+  height: 30px;
+  background: #084bac;
+  border-radius: 16px 16px 0px 0px;
 `;
 
 const StForm = styled.form`
   width: 100%;
   height: 100%;
+  min-height: 550px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+
+  flex-direction: column;
+`;
+
+const StInputs = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
   align-items: flex-start;
+
   flex-direction: column;
 `;

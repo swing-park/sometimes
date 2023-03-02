@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQueryClient, useMutation } from "react-query";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import styled from "styled-components";
-import { createCard } from "api";
+import { Button } from "@mui/material";
+import { createCard, editCard } from "api";
 import { NewCard as INewCard } from "types";
 
 const NewCard = () => {
@@ -11,26 +13,50 @@ const NewCard = () => {
   });
   const navigate = useNavigate();
   const { mode } = useParams();
+  const location = useLocation();
+  const [cookies] = useCookies(["Access-Token"]);
+
+  useEffect(() => {
+    if (location.state) {
+      setCard({ content: location.state.content });
+    }
+  }, [location]);
 
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(createCard, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("cards");
-    },
-  });
+  const { mutate: createCardMutate } = useMutation(
+    () => createCard(card, cookies["Access-Token"]),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("getCards");
+      },
+    }
+  );
+  const { mutate: editCardMutate } = useMutation(
+    () => editCard(location.state.id, card, cookies["Access-Token"]),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("getCards");
+      },
+    }
+  );
 
   const onSubmitHandler = () => {
     if (card.content.trim() === "") {
       alert("게시글 작성을 완료해주세요.");
       return;
     }
-
-    mutate(card);
+    if (mode === "create") {
+      createCardMutate();
+    }
+    if (mode === "edit") {
+      editCardMutate();
+    }
     navigate("/");
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.value.length >= 250) return alert("250자 이내로 입력해주세요");
     const { name, value } = e.target;
     setCard({
       ...card,
@@ -38,38 +64,59 @@ const NewCard = () => {
     });
   };
 
-  const onKeyPressHandler = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key !== "Enter") return;
-    onSubmitHandler();
-  };
-
   return (
     <>
-      <form onSubmit={onSubmitHandler}>
-        <Textarea
-          name="content"
-          value={card.content}
-          onChange={onChangeHandler}
-          onKeyDown={onKeyPressHandler}
-        />
-        {mode === "create" ? (
-          <button>등록하기</button>
-        ) : (
-          <button>수정하기</button>
-        )}
-      </form>
+      <StContainer>
+        <StForm onSubmit={onSubmitHandler}>
+          <StTextarea
+            name="content"
+            value={card.content}
+            onChange={onChangeHandler}
+          />
+          {mode === "create" ? (
+            <Button type="submit" variant="contained" size="large">
+              등록하기
+            </Button>
+          ) : (
+            <Button type="submit" variant="contained" size="large">
+              수정하기
+            </Button>
+          )}
+        </StForm>
+      </StContainer>
     </>
   );
 };
 
 export default NewCard;
 
-const Textarea = styled.textarea`
-  width: 100%;
-  border: 1px solid #eee;
+const StContainer = styled.div`
+  margin: 0px 52px;
+  max-height: 300px;
+  min-height: 650px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StForm = styled.form`
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StTextarea = styled.textarea`
   box-sizing: border-box;
-  border-radius: 8px;
-  padding: 100px;
-  font-size: 14px;
+  width: 500px;
+  height: 350px;
+
+  background: #ffffff;
+  border: 1px solid lightgray;
+  border-radius: 24px;
+
+  padding: 30px;
+  font-size: 30px;
   margin-bottom: 20px;
 `;

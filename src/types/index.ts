@@ -5,6 +5,7 @@ export interface Card {
   createdAt: string;
   modifiedAt: string;
   likes: number;
+  image: string;
 }
 
 export interface NewCard {
