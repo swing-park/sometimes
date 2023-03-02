@@ -48,8 +48,6 @@ const StHeader = styled.div`
   justify-content: space-between;
   margin: 20px 20px;
   padding-bottom: 10px;
-
-  border-bottom: 1px solid #444;
 `;
 
 const StMsg = styled.div`
@@ -83,7 +81,7 @@ const StBodyWrapper = styled.div`
 const StContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 0px 52px;
+  padding: 10px 52px;
   display: flex;
   flex-direction: column;
   align-items: center;

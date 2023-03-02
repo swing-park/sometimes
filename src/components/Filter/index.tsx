@@ -19,14 +19,24 @@ const Filter = ({ setCards, existCards }: Props) => {
     1000
   );
   return (
-    <StContainer>
-      <input type="text" onChange={debounce} />
-    </StContainer>
+    <>
+      <StInput
+        type="text"
+        onChange={debounce}
+        placeholder="유저이름을 검색하세요"
+      />
+    </>
   );
 };
 
 export default Filter;
 
-const StContainer = styled.div`
-  border: 1px solid red;
+const StInput = styled.input`
+  position: absolute;
+  top: -40px;
+  left: 15px;
+  height: 30px;
+  border-radius: 10px;
+  border: 2px solid black;
+  padding: 5px;
 `;
