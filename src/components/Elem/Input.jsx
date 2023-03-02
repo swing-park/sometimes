@@ -9,7 +9,7 @@ export default Input;
 const StInput = styled.input`
   box-sizing: border-box;
   height: 46px;
-  width: 50%;
+  width: 100%;
   outline: none;
   border-radius: 8px;
   padding: 0 12px;
