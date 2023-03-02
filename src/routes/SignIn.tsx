@@ -5,7 +5,8 @@ import { useCookies } from "react-cookie";
 import styled from "styled-components";
 import { signin } from "api";
 import { User } from "types";
-import { Wrapper, Button, Text, Input } from "components";
+import { Wrapper, Text, Input } from "components";
+import Button from "@mui/material/Button";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -68,10 +69,12 @@ const SignIn = () => {
             name="password"
             value={user.password || ""}
           />
-          <Button mg="20px 0">로그인</Button>
+          <Button variant="outlined" size="large">
+            로그인
+          </Button>
           <Wrapper>
             회원이 아니신가요?
-            <Link to={"/signup"}>회원가입</Link>
+            <Link to={"/signup"}> 회원가입</Link>
           </Wrapper>
         </StForm>
       </StContainer>

@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { signup } from "api";
 import { NewUser } from "types";
-import { Wrapper, Button, Text, Input } from "components";
+import { Wrapper, Text, Input } from "components";
+import Button from "@mui/material/Button";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -119,7 +120,9 @@ const SignUp = () => {
               {passwordInput}
             </Text>
           </Wrapper>
-          <Button mg="10px 0">회원가입</Button>
+          <Button variant="outlined" size="large">
+            회원가입
+          </Button>
         </StForm>
       </StContainer>
     </>

@@ -123,7 +123,6 @@ const StCardBox = styled(motion.div)<{ imgsrc: string }>`
   position: relative;
   width: 300px;
   height: 300px;
-  border: 1px solid red;
   border-radius: 10px;
   padding: 10px;
   cursor: pointer;
@@ -132,6 +131,7 @@ const StCardBox = styled(motion.div)<{ imgsrc: string }>`
   &::after {
     width: 100%;
     height: 100%;
+    border-radius: 24px;
     content: "";
     background-image: ${(props) => `url(${props.imgsrc})`};
     background-size: cover;
@@ -154,11 +154,13 @@ const StCardFooter = styled.div`
   align-items: center;
   width: 100%;
   height: 30px;
+  border: 1px solid #f3f3f3d2;
+  border-radius: 0px 0px 24px 24px;
+  background-color: white;
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 10px 5px;
-  border: 1px solid red;
+  padding: 20px 5px;
   z-index: 999;
 `;
 

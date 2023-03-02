@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Avatar } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { useCookies } from "react-cookie";
+import Button from "@mui/material/Button";
 
 interface Props {
   isLogin: boolean;
@@ -22,11 +23,21 @@ const MyPageToolBar = ({ isLogin }: Props) => {
       </Avatar>
       <div>{isLogin ? "username" : "로그인이 필요합니다"}</div>
       {isLogin ? (
-        <button onClick={handleOnClickLogOutBtn}>로그아웃</button>
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={handleOnClickLogOutBtn}
+        >
+          로그아웃
+        </Button>
       ) : (
-        <button onClick={() => window.location.replace("/signin")}>
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={() => window.location.replace("/signin")}
+        >
           로그인
-        </button>
+        </Button>
       )}
     </StMyPageToolBar>
   );
