@@ -5,7 +5,8 @@ import { useCookies } from "react-cookie";
 import styled from "styled-components";
 import { signin } from "api";
 import { User } from "types";
-import { Wrapper, Button, Text, Input } from "components";
+import { Wrapper, Text, Input } from "components";
+import Button from "@mui/material/Button";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -71,9 +72,10 @@ const SignIn = () => {
               value={user.password || ""}
             />
           </StInputs>
-
-          <Button mg="20px 0">로그인</Button>
-          <Wrapper>
+          <Button type="submit" variant="outlined" size="large">
+            로그인
+          </Button>
+          <Wrapper mg="20px 0px">
             회원이 아니신가요?
             <Link to={"/signup"}>
               <Text color="blue">회원가입</Text>
@@ -114,7 +116,7 @@ const StHeader = styled.div`
 
   width: 100%;
   height: 30px;
-  background: #94c8b4;
+  background: #084bac;
   border-radius: 16px 16px 0px 0px;
 `;
 
@@ -138,4 +140,5 @@ const StInputs = styled.div`
   align-items: flex-start;
 
   flex-direction: column;
+  margin-bottom: 20px;
 `;

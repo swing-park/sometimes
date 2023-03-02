@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQueryClient, useMutation } from "react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import styled from "styled-components";
+import { Button } from "@mui/material";
 import { createCard, editCard } from "api";
 import { NewCard as INewCard } from "types";
-import { Button } from "components";
 
 const NewCard = () => {
   const [card, setCard] = useState<INewCard>({
@@ -15,6 +15,12 @@ const NewCard = () => {
   const { mode } = useParams();
   const location = useLocation();
   const [cookies] = useCookies(["Access-Token"]);
+
+  useEffect(() => {
+    if (location.state) {
+      setCard({ content: location.state.content });
+    }
+  }, [location]);
 
   const queryClient = useQueryClient();
 
@@ -50,6 +56,7 @@ const NewCard = () => {
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.value.length >= 250) return alert("250자 이내로 입력해주세요");
     const { name, value } = e.target;
     setCard({
       ...card,
@@ -67,9 +74,13 @@ const NewCard = () => {
             onChange={onChangeHandler}
           />
           {mode === "create" ? (
-            <Button>등록하기</Button>
+            <Button type="submit" variant="contained" size="large">
+              등록하기
+            </Button>
           ) : (
-            <Button>수정하기</Button>
+            <Button type="submit" variant="contained" size="large">
+              수정하기
+            </Button>
           )}
         </StForm>
       </StContainer>

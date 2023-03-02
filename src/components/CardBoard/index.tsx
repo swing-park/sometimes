@@ -26,6 +26,9 @@ const CardBoard = () => {
     <StContainer>
       <Filter setCards={setCards} existCards={state.cards} />
       <StContent>
+        <StBtn onClick={handleOnClickCreateBtn}>
+          <Add sx={{ fontSize: 100, color: "white" }} />
+        </StBtn>
         {cards &&
           cards.map((card) => (
             <Card
@@ -36,9 +39,6 @@ const CardBoard = () => {
             />
           ))}
       </StContent>
-      <StBtn onClick={handleOnClickCreateBtn}>
-        <Add />
-      </StBtn>
       <AnimatePresence>
         {clickedCardId && clickedCard && (
           <Modal
@@ -54,26 +54,32 @@ const CardBoard = () => {
 export default CardBoard;
 
 const StContainer = styled.div`
-  width: 67%;
+  position: relative;
+  width: 100%;
   max-height: 500px;
   min-height: 700px;
+
   display: flex;
+  align-items: flex-start;
   flex-wrap: wrap;
-  align-items: center;
   margin: 0px auto;
 `;
 
 const StContent = styled.div`
-  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
 
 const StBtn = styled.div`
-  box-sizing: border-box;
   width: 350px;
   height: 250px;
   padding: 20px;
 
-  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   border: 3px solid #ffffff;
   border-radius: 24px;
 `;

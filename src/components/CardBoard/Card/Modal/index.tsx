@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import styled from "styled-components";
 import { IconButton } from "@mui/material";
-import { Favorite } from "@mui/icons-material";
+import { Favorite, Edit, Delete } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { Card } from "types";
 import { likeCard, deleteCard } from "api";
@@ -62,7 +62,9 @@ const Modal = ({ clickedCard, setClickedCardId }: Props) => {
     setClickedCardId(null);
   };
   const handleOnClickEditBtn = () =>
-    navigate("/cards/edit", { state: { id: clickedCard.id } });
+    navigate("/cards/edit", {
+      state: { id: clickedCard.id, content: clickedCard.content },
+    });
 
   const handleOnClickDelBtn = () => deleteCardMutate();
 
@@ -78,12 +80,20 @@ const Modal = ({ clickedCard, setClickedCardId }: Props) => {
         <StCardHeader>
           {clickedCard.nickname === sessionStorage.getItem("nickname") && (
             <>
-              <button style={{ zIndex: "999" }} onClick={handleOnClickEditBtn}>
-                수정
-              </button>
-              <button style={{ zIndex: "999" }} onClick={handleOnClickDelBtn}>
-                삭제
-              </button>
+              <IconButton
+                color="secondary"
+                style={{ zIndex: "999" }}
+                onClick={handleOnClickEditBtn}
+              >
+                <Edit />
+              </IconButton>
+              <IconButton
+                color="secondary"
+                style={{ zIndex: "999" }}
+                onClick={handleOnClickDelBtn}
+              >
+                <Delete />
+              </IconButton>
             </>
           )}
         </StCardHeader>
@@ -132,6 +142,7 @@ const StCardBox = styled(motion.div)<{ imgsrc: string }>`
   width: 400px;
   height: 400px;
   box-shadow: rgb(0 0 0 / 25%) 0px 14px 28px, rgb(0 0 0 / 22%) 0px 10px 10px;
+  border-radius: 10px;
   padding: 10px;
   cursor: pointer;
   z-index: 9999;
@@ -139,6 +150,7 @@ const StCardBox = styled(motion.div)<{ imgsrc: string }>`
   &::after {
     width: 100%;
     height: 100%;
+    border-radius: 24px;
     content: "";
     background-image: ${(props) => `url(${props.imgsrc})`};
     background-size: cover;
@@ -161,6 +173,7 @@ const StContent = styled.div`
   background-color: ${({ theme }) => theme.color.black};
   padding: 10px;
   z-index: 999;
+  word-break: break-all;
 `;
 
 const StCardFooter = styled.div`
@@ -169,6 +182,9 @@ const StCardFooter = styled.div`
   align-items: center;
   width: 100%;
   height: 30px;
+  border: 1px solid #f3f3f3d2;
+  border-radius: 0px 0px 24px 24px;
+  background-color: white;
   position: absolute;
   bottom: 0;
   left: 0;
