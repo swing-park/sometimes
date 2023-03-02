@@ -43,18 +43,18 @@ const Modal = ({ clickedCard, setClickedCardId }: Props) => {
   );
 
   useEffect(() => {
-    if (likeCardData) {
-      const { msg } = likeCardData.data;
-      alert(msg);
-    }
-  }, [likeCardData]);
-
-  useEffect(() => {
     if (deleteCardData) {
       const { msg } = deleteCardData.data;
       alert(msg);
     }
   }, [deleteCardData]);
+
+  useEffect(() => {
+    if (likeCardData) {
+      const { msg } = likeCardData.data;
+      alert(msg);
+    }
+  }, [likeCardData]);
 
   const handleOnClickLikeBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -75,17 +75,21 @@ const Modal = ({ clickedCard, setClickedCardId }: Props) => {
       onClick={() => setClickedCardId(null)}
     >
       <StCardBox imgsrc={clickedCard.image} layoutId={clickedCard.id}>
-        {clickedCard.nickname === sessionStorage.getItem("nickname") && (
-          <>
-            <button style={{ zIndex: "999" }} onClick={handleOnClickEditBtn}>
-              수정
-            </button>
-            <button style={{ zIndex: "999" }} onClick={handleOnClickDelBtn}>
-              삭제
-            </button>
-          </>
-        )}
-        <StContent>{clickedCard.content}</StContent>
+        <StCardHeader>
+          {clickedCard.nickname === sessionStorage.getItem("nickname") && (
+            <>
+              <button style={{ zIndex: "999" }} onClick={handleOnClickEditBtn}>
+                수정
+              </button>
+              <button style={{ zIndex: "999" }} onClick={handleOnClickDelBtn}>
+                삭제
+              </button>
+            </>
+          )}
+        </StCardHeader>
+        <StBody>
+          <StContent>{clickedCard.content}</StContent>
+        </StBody>
         <StCardFooter>
           <div>{getYYYYMMDD(clickedCard.modifiedAt)}</div>
           <StLikesWrapper>
@@ -103,27 +107,31 @@ const Modal = ({ clickedCard, setClickedCardId }: Props) => {
 export default Modal;
 
 const StOverlay = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   z-index: 999;
 `;
 
-const StCardBox = styled(motion.div)<{ imgsrc: string }>`
+const StCardHeader = styled.div`
+  z-index: 99999;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+`;
+
+const StCardBox = styled(motion.div)<{ imgsrc: string }>`
+  text-align: center;
   position: relative;
-  width: 300px;
-  height: 300px;
-  border: 1px solid red;
-  border-radius: 10px;
+  margin: auto 0;
+  width: 400px;
+  height: 400px;
+  box-shadow: rgb(0 0 0 / 25%) 0px 14px 28px, rgb(0 0 0 / 22%) 0px 10px 10px;
   padding: 10px;
   cursor: pointer;
   z-index: 9999;
@@ -138,6 +146,14 @@ const StCardBox = styled(motion.div)<{ imgsrc: string }>`
     top: 0;
     left: 0;
   }
+`;
+
+const StBody = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 `;
 
 const StContent = styled.div`
@@ -156,9 +172,9 @@ const StCardFooter = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 10px 5px;
-  border: 1px solid red;
+  padding: 20px 5px;
   z-index: 999;
+  background-color: white;
 `;
 
 const StLikesWrapper = styled.div`
